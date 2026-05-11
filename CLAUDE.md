@@ -45,7 +45,7 @@ backend/
     expenses.py        # GET/DELETE/PUT /api/expenses[/{id}]
     summary.py         # GET /api/summary
   services/
-    ocr_service.py     # LangChain ChatUpstage 체인, 이미지→Base64→JSON 변환
+    ocr_service.py     # Upstage OCR API + ChatUpstage(solar-pro) JSON 변환
     storage_service.py # expenses.json 읽기/쓰기 헬퍼
   data/expenses.json   # 누적 저장 JSON 배열; UUID v4 ID, ISO 8601 타임스탬프
 ```

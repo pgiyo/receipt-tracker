@@ -816,10 +816,13 @@ module.exports = {
 | 빌드 도구 | Vite | v5+ |
 | 스타일링 | TailwindCSS | v3+ |
 | HTTP 클라이언트 | Axios | v1+ |
-| 백엔드 | Python FastAPI | v0.111+ |
-| LLM 오케스트레이션 | LangChain | v0.2+ |
-| OCR LLM | Upstage document-digitization-vision | - |
-| 이미지 처리 | Pillow / pdf2image | - |
+| 백엔드 | Python FastAPI | v0.111 |
+| LLM 오케스트레이션 | LangChain | v1.2.18 |
+| LLM 오케스트레이션 코어 | LangChain-Core | v1.3.3 |
+| OCR LLM 연동 | langchain-upstage | v0.7.7 |
+| OCR API | Upstage `/v1/document-digitization` (model=ocr) | - |
+| JSON 구조화 LLM | Upstage Solar-Pro (ChatUpstage) | - |
+| 이미지 처리 | Pillow | v12+ |
 | 데이터 저장 | JSON 파일 | DB 미사용 |
 | 배포 | Vercel | - |
 | 버전 관리 | GitHub | main 브랜치 |
@@ -1058,26 +1061,27 @@ receipt-tracker/
 
 #### requirements.txt
 
-> **Phase 0 검증 반영 업데이트**: pdf2image/Poppler 제거, langchain-upstage 최신 버전 적용
+> **업데이트 이력**: pdf2image/Poppler 제거(Phase 0), langchain 최신 버전 고정(Phase 1)
 
 ```txt
 fastapi==0.111.0
 uvicorn[standard]==0.29.0
 python-multipart==0.0.9
-langchain-core>=0.3.0
-langchain-upstage>=0.7.0
+langchain==1.2.18
+langchain-core==1.3.3
+langchain-upstage==0.7.7
 pillow>=10.3.0
 python-dotenv>=1.0.1
 requests>=2.33.0
 ```
 
 #### 완료 기준
-- [ ] `receipt-tracker` Remote Repository 생성되어 현재 프로젝트 파일들이 Push 되어 있어야 한다
-- [ ] 가상환경 폴더 venv가 생성되어 있고, 패키지가 설치되어 있다
-- [ ] `uvicorn backend.main:app --reload` 실행 시 FastAPI 서버가 정상 기동되는지 확인하고 서버가 스타트 되어 있어야 한다
-- [ ] 서버가 잘 동작하는지 테스트 하는 Health Check 기능을 반드시 작성되어 있어야 한다
-- [ ] `http://localhost:8000/docs` Swagger UI가 열린다
-- [ ] `.env` 파일이 `.gitignore`에 포함되어 있다
+- [x] `receipt-tracker` Remote Repository 생성되어 현재 프로젝트 파일들이 Push 되어 있어야 한다 → https://github.com/pgiyo/receipt-tracker
+- [x] 가상환경 폴더 venv가 생성되어 있고, 패키지가 설치되어 있다
+- [x] `uvicorn main:app` 실행 시 FastAPI 서버가 정상 기동된다 (PID 9500, port 8000)
+- [x] 서버가 잘 동작하는지 테스트 하는 Health Check 기능을 반드시 작성되어 있어야 한다 → `GET /health` 200 응답 확인
+- [x] `http://localhost:8000/docs` Swagger UI가 열린다
+- [x] `.env` 파일이 `.gitignore`에 포함되어 있다
 
 
 ---
